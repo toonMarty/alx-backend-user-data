@@ -109,7 +109,10 @@ def main():
     users = connection.cursor()
     users.execute(
         "SELECT CONCAT('name=', name, "
+        "';email=', email, "
+        "';phone=', phone, "
         "';ssn=', ssn, "
+        "';password=', password, "
         "';ip=', ip, "
         "';user_agent', user_agent, ';') AS message FROM users;")
     RedactingFormatter(fields=PII_FIELDS)
