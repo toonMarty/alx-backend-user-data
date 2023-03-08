@@ -27,15 +27,16 @@ class Auth:
             for idx in range(len(excluded_paths)):
                 excluded_paths[idx] = excluded_paths[idx].rstrip('/')
 
+        if path is None:
+            return True
+
         if path is not None:
-            # st_path: string.tolerant_path
+            # st_path: slash.tolerant_path
             st_path = path.rstrip('/')
             if st_path is None and st_path not in excluded_paths:
                 return True
             if st_path in excluded_paths:
                 return False
-            if st_path is None and excluded_paths == []:
-                return True
         if excluded_paths is None and excluded_paths == '':
             return True
         return True
