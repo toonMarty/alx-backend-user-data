@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 This module contains a class Auth that will
 be the template for all authentication systems
