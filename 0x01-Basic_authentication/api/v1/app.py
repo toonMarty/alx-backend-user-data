@@ -42,6 +42,8 @@ def forbidden(error) -> str:
 
 @app.before_request
 def filter_request():
+    """Adding a method to handler
+    """
     path_list = ['/api/v1/status/', '/api/v1/unauthorized/',
                  '/api/v1/forbidden/']
 
