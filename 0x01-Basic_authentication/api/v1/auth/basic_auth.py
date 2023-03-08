@@ -3,6 +3,7 @@
 This module contains an empty class BasicAuth
 that inherits from Auth
 """
+import base64
 from api.v1.auth.auth import Auth
 
 
@@ -32,3 +33,25 @@ class BasicAuth(Auth):
             return None
         else:
             return authorization_header[6:]
+
+    def decode_base64_authorization_header(self,
+                                           base64_authorization_header: str)\
+            -> str:
+        """
+        This method returns the decoded value of a Base64 string
+        Args:
+            base64_authorization_header(str): the authorization header
+        Returns:
+            decoded value as a UTF-8 string else None
+        """
+        if base64_authorization_header is None:
+            return None
+        if not isinstance(base64_authorization_header, str):
+            return None
+        try:
+            encoded_string = base64_authorization_header.encode('utf-8')
+            data = base64.b64decode(encoded_string)
+            simple_string = data.decode('utf-8')
+            return simple_string
+        except Exception:
+            return None
