@@ -23,22 +23,21 @@ class Auth:
         Return:
             False(bool)
         """
-        if excluded_paths is not None:
-            for idx in range(len(excluded_paths)):
-                excluded_paths[idx] = excluded_paths[idx].rstrip('/')
-
+        if excluded_paths is None or excluded_paths == '':
+            return True
+        if path is not None:
+            if path[len(path) - 1] is not '/':
+                path += '/'
         if path is None:
             return True
-
-        if path is not None:
-            # st_path: slash.tolerant_path
-            st_path = path.rstrip('/')
-            if st_path is None and st_path not in excluded_paths:
-                return True
-            if st_path in excluded_paths:
+        for item in excluded_paths:
+            a_val = item.find('*')
+            if a_val != -1 and len(path) >= len(item):
+                p_cpy = path[: a_val]
+                if p_cpy == item[: a_val]:
+                    return False
+            elif path == item:
                 return False
-        if excluded_paths is None and excluded_paths == '':
-            return True
         return True
 
     def authorization_header(self, request=None) -> str:
