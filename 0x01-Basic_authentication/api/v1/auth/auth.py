@@ -34,7 +34,7 @@ class Auth:
                 return True
             if st_path in excluded_paths:
                 return False
-        if excluded_paths is None or excluded_paths == '':
+        if excluded_paths is None and excluded_paths == '':
             return True
         return True
 
