@@ -106,3 +106,19 @@ class BasicAuth(Auth):
         if not pswd:
             return None
         return user[0]
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """
+        This method overloads Auth and retrieves the User instance
+        for a request
+        Args:
+            request: the request
+        Return:
+            User instance for a request
+        """
+        header = self.authorization_header(request)
+        auth = self.extract_base64_authorization_header(header)
+        decoded_val = self.decode_base64_authorization_header(auth)
+        credentials = self.extract_user_credentials(decoded_val)
+        return self.user_object_from_credentials(credentials[0],
+                                                 credentials[1])
