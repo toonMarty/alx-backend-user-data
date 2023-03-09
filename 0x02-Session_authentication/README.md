@@ -12,3 +12,5 @@ Updating SessionAuth class by:
 # 3. User ID for Session ID
 An instance method def user_id_for_session_id that returns a User ID based on a Session ID
 
+# 4. Session cookie
+The method def session_cookie that returns a cookie value from a request
