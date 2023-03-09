@@ -77,8 +77,14 @@ class BasicAuth(Auth):
         if not decoded_base64_authorization_header.__contains__(':'):
             return None, None
 
-        credentials_list = decoded_base64_authorization_header.split(':')
-        return credentials_list[0], credentials_list[1]
+        # Improving method to allow password with :
+        sep = decoded_base64_authorization_header.find(":")
+        user = decoded_base64_authorization_header[:sep]
+        pswd = decoded_base64_authorization_header[sep + 1:]
+        return user, pswd
+
+        # credentials_list = decoded_base64_authorization_header.split(':')
+        # return credentials_list[0], credentials_list[1]
 
     def user_object_from_credentials(self, user_email: str, user_pwd: str) \
             -> TypeVar('User'):
