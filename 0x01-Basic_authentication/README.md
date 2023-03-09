@@ -25,3 +25,18 @@ A method def extract in the class BasicAuth that returns the Base64 part of the 
 
 # 8. Basic - Base64 decode
 A method def decode_base64_authorization_header that returns the decoded value of a Base64 string base64_authorization_header.
+
+# 9. Basic - User credentials
+A method def extract_user_credentials in the class BasicAuth that returns the user email and password from the Base64 decoded value.
+
+# 10. Basic - User object
+A method def user_object_from_credentials in the class BasicAuth that returns the User instance based on his email and password.
+
+# 11. Basic - Overload current_user - and BOOM!
+the method def current_user in the class BasicAuth that overloads Auth and retrieves the User instance for a request.
+
+# 12. Basic - Allow password with ":"
+Improving the method def extract_user_credentials to allow password with :.
+
+# 13. Require auth with stars
+Improving def require_auth by allowing * at the end of excluded paths.
