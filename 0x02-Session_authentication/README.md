@@ -14,3 +14,6 @@ An instance method def user_id_for_session_id that returns a User ID based on a 
 
 # 4. Session cookie
 The method def session_cookie that returns a cookie value from a request
+
+# 5. Before request
+Updating the @app.before_request method in api/v1/app.py
