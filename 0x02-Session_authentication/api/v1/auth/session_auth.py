@@ -4,6 +4,7 @@ This module contains an empty class
 SessionAuth
 """
 from api.v1.auth.auth import Auth
+from models.user import User
 import uuid
 
 
@@ -44,3 +45,15 @@ class SessionAuth(Auth):
         if not isinstance(session_id, str):
             return None
         return self.user_id_by_session_id.get(session_id)
+
+    def current_user(self, request=None):
+        """
+        This method returns a User instance based on a cookie value
+        Args:
+            request: the request
+        Return:
+            User instance
+        """
+        cookie_val = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(cookie_val)
+        return User.get(user_id)
