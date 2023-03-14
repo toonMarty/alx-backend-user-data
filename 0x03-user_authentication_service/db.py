@@ -52,7 +52,7 @@ class DB:
         method's input argument
         """
         session = self._session
-        our_user = session.query(User).filter_by(**kwargs).first()
+        our_user = session.query(User).filter_by(**kwargs).scalar()
 
         if not our_user or our_user is None:
             raise NoResultFound
