@@ -6,6 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 from user import Base, User
 
 
@@ -55,4 +56,6 @@ class DB:
 
         if not our_user:
             raise NoResultFound
+        if not our_user:
+            raise InvalidRequestError
         return our_user
