@@ -57,3 +57,22 @@ class DB:
         if not our_user:
             raise NoResultFound
         return our_user
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """
+        This method updates a user given the user_id and
+        arbitrary keyword arguments (fields we want to update)
+        Args:
+            user_id(int): the user id
+            kwargs: an arbitrary keyword argument(s)
+        Return:
+             None
+        """
+
+        user_to_mod = self.find_user_by(id=user_id)
+
+        for key, val in kwargs.items():
+            if key not in user_to_mod.__dict__:
+                raise ValueError
+            setattr(user_to_mod, key, val)
+        return None
