@@ -3,7 +3,7 @@
 This module contains a function _hash_password
 """
 import bcrypt
-from sqlalchemy.exc import NoResultFound
+from sqlalchemy.orm.exc import NoResultFound
 from db import DB
 from user import User
 
