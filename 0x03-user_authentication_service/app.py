@@ -99,10 +99,11 @@ def update_password():
     Updates a user's password given a rest token
     and the user's email
     """
+    email = request.form.get('email')
+    reset_token = request.form.get('reset_token')
+    new_password = request.form.get('password')
+
     try:
-        email = request.form.get('email')
-        reset_token = request.form.get('reset_token')
-        new_password = request.form.get('password')
         AUTH.update_password(reset_token, new_password)
         response = jsonify({"email": email, "message": "Password updated"})
         return response, 200
