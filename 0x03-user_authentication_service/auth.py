@@ -108,6 +108,6 @@ class Auth:
         if user:
             user_uuid = _generate_uuid()
             self._db.update_user(user.id, reset_token=user_uuid)
-            return user_uuid
+            return user.reset_token
         else:
             raise ValueError
