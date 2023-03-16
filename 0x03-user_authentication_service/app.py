@@ -2,7 +2,7 @@
 """
 Setting up a basic Flask app
 """
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
 
 
@@ -48,6 +48,20 @@ def session_login() -> str:
         response.set_cookie('session_id', new_session_id)
         return response
     abort(401)
+
+
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def session_logout():
+    """
+    Logs out a user from  a session
+    """
+    req_session_id = request.cookies.get('session_id')
+    user = AUTH.get_user_from_session_id(req_session_id)
+
+    if not user:
+        abort(403)
+    AUTH.destroy_session(user.id)
+    return redirect('/')
 
 
 if __name__ == '__main__':
