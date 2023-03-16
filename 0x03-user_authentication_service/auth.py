@@ -66,3 +66,15 @@ class Auth:
                                   exists.hashed_password)
         except NoResultFound:
             return False
+
+    def create_session(self, email: str) -> str:
+        """
+        Returns the session ID of a user as a UUID
+        string
+        """
+        try:
+            find_user = self._db.find_user_by(email=email)
+            find_user.session_id = _generate_uuid()
+            return find_user.session_id
+        except NoResultFound:
+            pass
