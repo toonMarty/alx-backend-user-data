@@ -4,7 +4,6 @@ Setting up a basic Flask app
 """
 from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
-from sqlalchemy.orm.exc import NoResultFound
 
 
 AUTH = Auth()
@@ -90,7 +89,7 @@ def get_reset_password_token() -> str:
         user_token = AUTH.get_reset_password_token(email)
         response = jsonify({"email": email, "reset_token": user_token})
         return response, 200
-    except NoResultFound:
+    except ValueError:
         abort(403)
 
 
