@@ -64,5 +64,19 @@ def session_logout():
     return redirect('/')
 
 
+@app.route('/profile', methods=['GET'], strict_slashes=False)
+def user_profile() -> str:
+    """
+    Get a user profile
+    """
+    session_id_cookie = request.cookies.get('session_id')
+    user = AUTH.get_user_from_session_id(session_id_cookie)
+
+    if user:
+        return jsonify({"email": user.email}), 200
+    else:
+        abort(403)
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port="5000")
