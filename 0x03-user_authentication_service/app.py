@@ -80,7 +80,7 @@ def user_profile() -> str:
 
 
 @app.route('/reset_password', methods=['POST'], strict_slashes=False)
-def get_reset_password_token():
+def get_reset_password_token() -> str:
     """
     Generates a token and responds with a 200 HTTP status
     if email is registered
